@@ -1,2 +1,2 @@
-# GraphQLFantasyFootballApi
-API for CRUD operations and advanced querying on a host of fantasy data dating back to 2015
+# Web Scraper for NFL DFS data for use in roster construction and analytics.
+Scrapes data and hosts on a single endpoint.
