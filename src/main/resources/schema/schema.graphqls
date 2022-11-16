@@ -1,288 +1,45 @@
-type QB {
-    id: ID!
-    rank: Int
-    name: String!
-    team: String!
-    cmp: Int
-    passAtt: Int
-    pct: Float
-    passYds: Int
-    yA: Float
-    passTds: Int
-    inter: Int
-    sacks: Int
-    rushAtt: Int
-    rushYds: Int
-    rushTds: Int
-    fl: Int
-    games: Int
-    fPts: Float!
-    fPtsAGame: Float!
-    rostPct: Float
-    year: String!
+type Player {
+    team: Team
+    teamId: Int
+    id: Int!
+    firstName: String
+    lastName: String
+    salary: Int
+    position: String
+    lowProjection: Float
+    medianProjection: Float
+    highProjection: Float
 }
 
-type RB {
-    id: ID!
-    rank: Int
-    name: String!
-    team: String!
-    rushAtt: Int
-    rushYds: Int
-    yA: Float
-    lg: Int
-    rushTds: Int
-    rec: Int
-    tgt: Int
-    recYds: Int
-    yR: Float
-    recTds: Int
-    fl: Int
-    games: Int
-    fPts: Float!
-    fPtsAGame: Float!
-    rostPct: Float
-    year: Int!
-}
-
-type WR {
-    id: ID!
-    rank: Int
-    name: String!
-    team: String!
-    rec: Int
-    tgt: Int
-    recYds: Int
-    yR: Float
-    lg: Int
-    recTds: Int
-    rushAtt: Int
-    rushYds: Int
-    rushTds: Int
-    fl: Int
-    games: Int
-    fPts: Float!
-    fPtsAGame: Float!
-    rostPct: Float
-    year: Int!
-}
-
-type TE {
-    id: ID!
-    rank: Int
-    name: String!
-    team: String!
-    rec: Int
-    tgt: Int
-    recYds: Int
-    yR: Float
-    lg: Int
-    recTd: Int
-    rushAtt: Int
-    rushYds: Int
-    rushTds: Int
-    fl: Int
-    games: Int
-    fPts: Float!
-    fPtsAGame: Float!
-    rostPct: Float
-    year: Int!
-}
-
-type K {
-    id: ID!
-    rank: Int
-    name: String!
-    team: String!
-    fg: Int
-    fga: Int
-    pct: Float
-    lg: Int
-    oneToNineteen: Int
-    twentyToTwentynine: Int
-    thirtyToThirtynine: Int
-    fortyToFortynine: Int
-    fiftyPlus: Int
-    xpt: Int
-    xpa: Int
-    games: Int
-    fPts: Int!
-    fPtsAGame: Float!
-    rostPct: Float
-    year: Int!
-}
-
-type DST {
-    id: ID!
-    rank: Int
-    name: String!
-    team: String!
-    sack: Int
-    int: Int
-    fr: Int
-    ff: Int
-    defTds: Int
-    sfty: Int
-    spcTds: Int
-    games: Int
-    fPts: Float!
-    fPtsAGame: Float!
-    rostPct: Float
-    year: Int!
+type Team {
+    id: Int!
+    name: String
+    overUnder: Float
+    opponent: Team
+    favorite: String
 }
 
 type Query{
-    allQB(yearFilter: String): [QB]
-    allRB(yearFilter: Int!): [RB]
-    allWR(yearFilter: Int!): [WR]
-    allTE(yearFilter: Int!): [TE]
-    allK(yearFilter: Int!): [K]
-    allDST(yearFilter: Int!): [DST]
-    QB(yearFilter: Int!, playerFilter: String!): QB
-    RB(yearFilter: Int!, playerFilter: String!): RB
-    WR(yearFilter: Int!, playerFilter: String!): WR
-    TE(yearFilter: Int!, playerFilter: String!): TE
-    K(yearFilter: Int!, playerFilter: String!): K
-    DST(yearFilter: Int!, playerFilter: String!): DST
+    Player(playerFilter: PlayerFilter!): [Player]
+    Team(teamFilter: TeamFilter!): [Team]
 }
 
-input QBInput {
-    rank: Int
-    name: String!
-    team: String!
-    cmp: Int
-    passAtt: Int
-    pct: Float
-    passYds: Int
-    yA: Float
-    passTd: Int
-    int: Int
-    sacks: Int
-    rushAtt: Int
-    rushYds: Int
-    rushTds: Int
-    fl: Int
-    games: Int
-    fPts: Float!
-    fPtsAGame: Float!
-    rostPct: Float
-    year: Int!
+input PlayerFilter {
+    teamId: Int
+    id: Int
+    firstName: String
+    lastName: String
+    salary: Int
+    position: String
+    projection: Float
 }
 
-input RBInput {
-    rank: Int
-    name: String!
-    team: String!
-    rushAtt: Int
-    rushYds: Int
-    yA: Float
-    lg: Int
-    rushTds: Int
-    rec: Int
-    tgt: Int
-    recYds: Int
-    yR: Float
-    recTds: Int
-    fl: Int
-    games: Int
-    fPts: Float!
-    fPtsAGame: Float!
-    rostPct: Float
-    year: Int!
-}
-
-input WRInput {
-    rank: Int
-    name: String!
-    team: String!
-    rec: Int
-    tgt: Int
-    recYds: Int
-    yR: Float
-    lg: Int
-    recTds: Int
-    rushAtt: Int
-    rushYds: Int
-    rushTds: Int
-    fl: Int
-    games: Int
-    fPts: Float!
-    fPtsAGame: Float!
-    rostPct: Float
-    year: Int!
-}
-
-input TEInput {
-    rank: Int
-    name: String!
-    team: String!
-    rec: Int
-    tgt: Int
-    recYds: Int
-    yR: Float
-    lg: Int
-    recTd: Int
-    rushAtt: Int
-    rushYds: Int
-    rushTds: Int
-    fl: Int
-    games: Int
-    fPts: Float!
-    fPtsAGame: Float!
-    rostPct: Float
-    year: Int!
-}
-
-input KInput {
-    rank: Int
-    name: String!
-    team: String!
-    fg: Int
-    fga: Int
-    pct: Float
-    lg: Int
-    oneToNineteen: Int
-    twentyToTwentynine: Int
-    thirtyToThirtynine: Int
-    fortyToFortynine: Int
-    fiftyPlus: Int
-    xpt: Int
-    xpa: Int
-    games: Int
-    fPts: Int!
-    fPtsAGame: Float!
-    rostPct: Float
-    year: Int!
-}
-
-input DSTInput {
-    rank: Int
-    name: String!
-    team: String!
-    sack: Int
-    int: Int
-    fr: Int
-    ff: Int
-    defTds: Int
-    sfty: Int
-    spcTds: Int
-    games: Int
-    fPts: Float!
-    fPtsAGame: Float!
-    rostPct: Float
-    year: Int!
-}
-
-type Mutation {
-    addQB(QB: QBInput): QB
-    addRB(RB: RBInput): RB
-    addWR(WR: WRInput): WR
-    addTE(TE: TEInput): TE
-    addK(K: KInput): K
-    addDST(DST: DSTInput): DST
+input TeamFilter {
+    id: Int
+    name: String
+    overUnder: Float
 }
 
 schema {
     query: Query
-    mutation: Mutation
 }
